@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToC v3</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+  </head>
+  <body>
+
+
+    <div class="container-fluid">
+      <!-- to hide row or not to hide -->
+      <div class="row" id="display">
+        <div class="col-sm-8" id="puzzleContainer">
+
+        </div>
+
+        <div class="col-sm-4" id="formContainer">
+          <div class="container-fluid answer-form">
+            <h5 id="instructions">In a moment you will be shown a puzzle in which a series of tokens make a downward-pointing arrow in a grid. Moving only 3 tokens and moving only to the grey squares you must make the arrow point upwards. You have 30 seconds to study the puzzle and choose 3 tokens to solve the puzzle. Decide on the new position for each token. Once the 30 seconds are up, you have 45 seconds to fill in the form below. For each token, enter the letter corresponding to the token, then the co-ordinates of the row and column for the new position.</h5>
+              <form class="form-inline answers" action="index.html" method="GET" id="form">
+                <div class="container-fluid">
+                <div class="row">
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3"><strong>Letter</strong></div>
+                  <div class="col-sm-3"><strong>Row</strong></div>
+                  <div class="col-sm-3"><strong>Column</strong></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3"><strong>Token 1</strong></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="letter" value=""></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="row" value=""></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="column" value=""></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3"><strong>Token 2</strong></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="letter" value=""></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="row" value=""></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="column" value=""></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3"><strong>Token 3</strong></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="letter" value=""></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="row" value=""></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="column" value=""></div>
+                </div>
+                <br>
+
+
+                <input type="button" value="Submit answer" name="#" class="btn btn-success" id="submit-btn">
+                </div>
+              </form>
+            </div>
+            <div class="hide" id="timerTwoDisplay">
+              <h1 id = "cd2">00:<span>45</span></h1>
+            </div>
+
+            <div class="hide" id="formCover">
+              <div class="container-fluid formCoverDisplay">
+                <h1 id = "cd1">00:<span>30</span></h1>
+                <button type="button" class="btn btn-large cover-buttons" id="form-cover-btn"><h4>Ready to answer</h4></button>
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+
+      </div>
+    </div>
+    <div class="cover" id="cover">
+      <div class="row">
+              <div class="col-sm-4">
+                <form class="form-inline" action="index.html" method="GET" id="partInfo">
+                  <hr>
+                  <label class="form-control-label">
+                    Please enter your age <p></p>
+                    <input type="text" class="form-control" name="age" placeholder="e.g. 25">
+
+                  </label>
+                  <hr>
+                  <label class="form-control-label">
+                    and gender <p></p>
+                    <input type="text" class="form-control" name="sex" placeholder="e.g. Female / Male / Other">
+
+                  </label>
+                  <hr>
+
+                </form>
+
+              </div>
+              <div class="col-sm-4">
+                <button type="button" name="start" class="btn btn-large cover-buttons" id="cover-btn"><h4>Start application</h4></button>
+                <button type="button" name="start" class="btn btn-large cover-buttons hide" id="thanks-btn">
+                  <a href="thanks.html">
+                    <h4>Click here to end session</h4>
+                  </a>
+                </button>
+              </div>
+
+
+    </div>
+
+    <script type="text/javascript" src="assets/js/lib/jquery-3.2.1.min.js">
+    </script>
+    </script>
+    <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/FileSaver.js">
+    </script>
+    <script type="text/javascript" src="assets/js/app.js"></script>
+
+
+  </body>
+</html>
