@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToC v3</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>C - ToC v3</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
 
   </head>
   <body>
@@ -21,7 +21,6 @@
 
         <div class="col-sm-4" id="formContainer">
           <div class="container-fluid answer-form">
-            <h5 id="instructions">In a moment you will be shown a puzzle in which a series of tokens make a downward-pointing arrow in a grid. Moving only 3 tokens and moving only to the grey squares you must make the arrow point upwards. You have 30 seconds to study the puzzle and choose 3 tokens to solve the puzzle. Decide on the new position for each token. Once the 30 seconds are up, you have 45 seconds to fill in the form below. For each token, enter the letter corresponding to the token, then the co-ordinates of the row and column for the new position.</h5>
               <form class="form-inline answers" action="index.html" method="GET" id="form">
                 <div class="container-fluid">
                 <div class="row">
@@ -81,14 +80,17 @@
                   <hr>
                   <label class="form-control-label">
                     Please enter your age <p></p>
-                    <input type="text" class="form-control" name="age" placeholder="e.g. 25">
+                    <input type="number" class="form-control" name="age" placeholder="e.g. 25" required>
 
                   </label>
                   <hr>
                   <label class="form-control-label">
                     and gender <p></p>
-                    <input type="text" class="form-control" name="sex" placeholder="e.g. Female / Male / Other">
-
+                    <select class="form-control" name="sex">
+                      <option value="Female">Female</option>
+                      <option value="Male">Male</option>
+                      <option value="Prefer Not">Prefer not to say</option>
+                    </select>
                   </label>
                   <hr>
 
@@ -107,12 +109,12 @@
 
     </div>
 
-    <script type="text/javascript" src="assets/js/lib/jquery-3.2.1.min.js">
+    <script type="text/javascript" src="../assets/js/lib/jquery-3.2.1.min.js">
     </script>
     </script>
     <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/FileSaver.js">
     </script>
-    <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="../assets/js/other.js"></script>
 
 
   </body>

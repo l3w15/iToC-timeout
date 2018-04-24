@@ -11,7 +11,7 @@ var unsortedAnswer = [],      unsortedRecord = [],
     rows = $(".form-control[name=row]"),
     columns = $(".form-control[name=column]"),
     correctAnswer = ["4E", "7B", "7H", "Q", "R", "W"],
-    gong = new Audio("assets/gong.mp3");
+    gong = new Audio("../assets/gong.mp3");
 
 
 $( ".token" ).draggable({
@@ -52,7 +52,6 @@ function start() {
   $("#puzzle").toggleClass("hide");
   $("#formCover").toggleClass("partCover hide");
   $("#partInfo").addClass("hide");
-  $("#instructions").html("Moving only 3 tokens and moving only to the grey squares you must make the arrow point upwards. You have 30 seconds to study the puzzle and choose 3 tokens to solve the puzzle. Decide on the new position for each token. Once the 30 seconds are up, you have 45 seconds to fill in the form below. For each token, enter the letter corresponding to the token, then the co-ordinates of the row and column for the new position.")
   answer = [];
   unsortedAnswer = [];
   allMoves = [];
