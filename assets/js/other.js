@@ -71,21 +71,26 @@ function exportFile() {
   var data = [unsortedRecord, participantInfo];
   //var data = [[1,2,3,4,5],[11,22,33,44,55],[111,222,333,444,555],[1111,2222,3333,4444,5555]];
   var keys = ['"Time"', '"Participant Info"'];
-
+  
   var convertToCSV = function(data, keys) {
+    console.log("data:", data);
     var orderedData = [];
-    for (var i = 0, iLen = data.length; i < iLen; i++) {
-      temp = data[i];
-      for (var j = 0, jLen = temp.length; j < jLen; j++) {
-        quotes = ['"'+temp[j]+'"'];
+    for (var i = 0; i < data.length; i++) {
+      console.log("i", i);
+      var temp = data[i];
+      for (var j = 0; j < temp.length; j++) {
+        var quotes = ['"'+temp[j]+'"'];
         orderedData[j] ? orderedData[j].push(quotes) : orderedData.push([quotes]);
       }
-      return keys.join(',') + '\r\n' + orderedData.join('\r\n');
+      
+      
     }
+    return keys.join(',') + '\r\n' + orderedData.join('\r\n');
+
   }
 
   var str = convertToCSV(data, keys);
-
+  console.log(str);
   var blob = new Blob([str], {type: "text/plain;charset=utf-8"});
   saveAs(blob, [participantNum+'.csv']);
 }
