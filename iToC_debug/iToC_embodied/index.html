@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C - ToC v3</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
+  </head>
+  <body>
+
+
+    <div class="container-fluid">
+      <!-- to hide row or not to hide -->
+      <div class="row" id="display">
+        <div class="col-sm-8" id="puzzleContainer">
+
+        </div>
+
+        <div class="col-sm-4" id="formContainer">
+          <div class="container-fluid answer-form">
+              <form class="form-inline answers" action="index.html" method="GET" id="form">
+                <div class="container-fluid">
+                <div class="row">
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3"><strong>Letter</strong></div>
+                  <div class="col-sm-3"><strong>Row</strong></div>
+                  <div class="col-sm-3"><strong>Column</strong></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3"><strong>Token 1</strong></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="letter" value=""></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="row" value=""></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="column" value=""></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3"><strong>Token 2</strong></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="letter" value=""></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="row" value=""></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="column" value=""></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-3"><strong>Token 3</strong></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="letter" value=""></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="row" value=""></div>
+                  <div class="col-sm-3"><input type="text" class="form-control" name="column" value=""></div>
+                </div>
+                <br>
+
+
+                <input type="button" value="Submit answer" name="#" class="btn btn-success" id="submit-btn">
+                </div>
+              </form>
+            </div>
+
+            <div class="hide" id="formCover">
+              <div class="container-fluid formCoverDisplay">
+                <button type="button" class="btn btn-large cover-buttons" id="form-cover-btn"><h4>Ready to answer</h4></button>
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+
+      </div>
+    </div>
+    <div class="cover" id="cover">
+      <div class="row">
+        <div class="col-sm-4">
+          <form class="form-inline" action="index.html" method="GET" id="partInfo">
+            <hr>
+            <label class="form-control-label">
+              Please enter your age <p></p>
+              <input type="text" class="form-control" name="age" placeholder="e.g. 25">
+
+            </label>
+            <hr>
+            <label class="form-control-label">
+              and gender <p></p>
+              <select class="form-control" name="sex">
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Prefer Not">Prefer not to say</option>
+              </select>
+            </label>
+            <hr>
+          </form>
+        </div>
+        <div class="col-sm-4">
+          <button type="button" name="start" class="btn btn-large cover-buttons" id="cover-btn"><h4>Start application</h4></button>
+          <button type="button" name="start" class="btn btn-large cover-buttons hide" id="wait-btn"><h4>Please wait...</h4></button>
+        </div>
+    <div class="cover hide" id="cover2">
+      <div class="container-fluid">
+        <div class="jumbotron">
+          <h2 id="finish"></h2>
+          <h1>Thanks!</h1>
+          <h3>The psychology department would like to thank you for volunteering your time to help us with our research. </h3>
+        </div>
+            <button type="button" name="export" class="btn btn-default end-buttons" id="export"><h5>Psychology researcher only!</h5><h4>Export File</h4></a></button>
+            <button type="button" name="export" class="btn btn-default end-buttons hide" id="restart"><a href="index.html"><h5>Psychology researcher only!</h5><h4>Restart application</h4></a></button>
+        </div>
+      </div>
+
+    </div>
+
+    <script type="text/javascript" src="../assets/js/lib/jquery-3.2.1.min.js">
+    </script>
+    </script>
+    <script type="text/javascript" src="../assets/js/lib/fileSaver.js">
+    </script>
+    <script type="text/javascript" src="../assets/js/not_high.js"></script>
+
+
+  </body>
+</html>
