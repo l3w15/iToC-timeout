@@ -1,4 +1,3 @@
-
 var thinkTime = [],           answerTime = [],
     unsortedAnswer = [],      unsortedRecord = [],
     answer = [],              interval,
@@ -11,7 +10,7 @@ var thinkTime = [],           answerTime = [],
     rows = $(".form-control[name=row]"),
     columns = $(".form-control[name=column]"),
     correctAnswer = ["4E", "7B", "7H", "Q", "R", "W"],
-    gong = new Audio("assets/gong.mp3");
+    gong = new Audio("../assets/gong.mp3");
 
 
 $( ".token" ).draggable({
@@ -22,10 +21,10 @@ $( ".token" ).draggable({
 });
 
 $( ".col-sm-1" ).droppable({
-      drop: function( event, ui ) {
-        allMoves.push(" " + draggedToken + " to " + this.id);
-      }
-    });
+  drop: function( event, ui ) {
+    allMoves.push(" " + draggedToken + " to " + this.id);
+  }
+});
 
 function timer(secs, id, func) {
   var reset = secs;
@@ -52,11 +51,25 @@ function start() {
   $("#puzzle").toggleClass("hide");
   $("#formCover").toggleClass("partCover hide");
   $("#partInfo").addClass("hide");
-  $("#instructions").html("Moving only 3 tokens and moving only to the grey squares you must make the arrow point upwards. You have 30 seconds to study the puzzle and choose 3 tokens to solve the puzzle. Decide on the new position for each token. Once the 30 seconds are up, you have 45 seconds to fill in the form below. For each token, enter the letter corresponding to the token, then the co-ordinates of the row and column for the new position.")
   answer = [];
   unsortedAnswer = [];
   allMoves = [];
-  timer(30, "#cd1 span", ready);
+  timer(30, "#cd1 span", resetBoard);
+}
+
+function resetBoard() {
+  $( ".token" ).css("left","0px");
+  $( ".token" ).css("top","0px");
+  $("#puzzleCover").toggleClass("partCover");
+  clearInterval(interval);
+  allMovesRecord.push(allMoves);
+  allMoves = [];
+  setTimeout(restart, 3000);
+}
+
+function restart() {
+  $("#puzzleCover").toggleClass("partCover");
+  timer(30, "#cd1 span", resetBoard);
 }
 
 function ready() {
@@ -110,9 +123,9 @@ function submit() {
 
 function exportFile()
     {
-        var data = [unsortedRecord, thinkTime, answerTime, allMovesRecord, participantInfo];
+        var data = [unsortedRecord, thinkTime, allMovesRecord, participantInfo];
         //var data = [[1,2,3,4,5],[11,22,33,44,55],[111,222,333,444,555],[1111,2222,3333,4444,5555]];
-        var keys = ['"Answers submitted"', '"Thinking Time (seconds)"','"Data Entry Time (seconds)"', '"Dragged moves"', '"Participant Info"'];
+        var keys = ['"Answers submitted"', '"Thinking Time (seconds)"', '"Dragged moves"', '"Participant Info"'];
 
         var convertToCSV = function(data, keys) {
             var orderedData = [];
@@ -180,7 +193,6 @@ $("#export").on("click", function(){
   }
   participantNum = "B" + (Math.floor(Math.random()*90000) + 10000);
   thinkTime.push(timeTaken(thinkTime));
-  answerTime.push(timeTaken(answerTime));
   unsortedRecord.push("Total time: " + minutesAndSeconds(totalTime));
   participantInfo.push(participantNum);
   exportFile();
