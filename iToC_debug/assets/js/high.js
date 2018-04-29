@@ -1,5 +1,4 @@
-var thinkTime = [],           answerTime = [],
-    unsortedAnswer = [],      unsortedRecord = [],
+var unsortedAnswer = [],      unsortedRecord = [],
     answer = [],              interval,
     remainingSecs,            data,
     participantInfo = [],     participantNum,
@@ -26,17 +25,13 @@ $( ".col-sm-1" ).droppable({
   }
 });
 
-function timer(secs, id, func) {
+function restartTimer(secs, func) {
   var reset = secs;
   remainingSecs = secs;
   interval = setInterval(function() {
      secs--
      remainingSecs--
-     if (secs >= 10) {
-       $(id).text(secs);
-     } else {
-       $(id).text("0" + secs);
-     }
+     console.log(secs)
      if (secs == 0) {
         func();
         secs = reset;
@@ -54,22 +49,24 @@ function start() {
   answer = [];
   unsortedAnswer = [];
   allMoves = [];
-  timer(30, "#cd1 span", resetBoard);
+  restartTimer(30, resetBoard);
 }
 
 function resetBoard() {
+  gong.play();
   $( ".token" ).css("left","0px");
   $( ".token" ).css("top","0px");
   $("#puzzleCover").toggleClass("partCover");
   clearInterval(interval);
   allMovesRecord.push(allMoves);
   allMoves = [];
-  setTimeout(restart, 3000);
+  setTimeout(restart, 4000);
 }
 
 function restart() {
+  totalTime += 34;
   $("#puzzleCover").toggleClass("partCover");
-  timer(30, "#cd1 span", resetBoard);
+  restartTimer(30, resetBoard);
 }
 
 function ready() {
@@ -81,10 +78,7 @@ function ready() {
   clearInterval(interval);
   var remainder = (30 - remainingSecs);
   totalTime += remainder;
-  thinkTime.push(remainder);
   allMovesRecord.push(allMoves);
-  $("#cd1 span").text("30");
-  timer(45, "#cd2 span", submit);
 }
 
 function submit() {
@@ -95,10 +89,7 @@ function submit() {
   $("#cover").toggleClass("hide");
   $("#puzzle").toggleClass("hide");
   $("#puzzleCover").toggleClass("partCover");
-  $("#timerTwoDisplay").toggleClass("hide");
   clearInterval(interval);
-  totalTime += (45 - remainingSecs);
-  answerTime.push((45 - remainingSecs));
   $("#cd2 span").text("45");
   for(var i = 0; i < letters.length; i++){
     unsortedAnswer.push(" " + letters[i].value.toUpperCase() + " to " + rows[i].value.toUpperCase() + columns[i].value.toUpperCase())
@@ -121,35 +112,27 @@ function submit() {
   }
 }
 
-function exportFile()
-    {
-        var data = [allMovesRecord, unsortedRecord, thinkTime, participantInfo];
-        //var data = [[1,2,3,4,5],[11,22,33,44,55],[111,222,333,444,555],[1111,2222,3333,4444,5555]];
-        var keys = ['"Dragged moves"', '"Answers submitted"', '"Thinking Time (seconds)"', '"Participant Info"'];
+function exportFile() {
+  var data = [allMovesRecord, unsortedRecord, participantInfo];
+  var keys = ['"Dragged moves"', '"Answers submitted"', '"Participant Info"'];
 
-        var convertToCSV = function(data, keys) {
-            var orderedData = [];
-            for (var i = 0, iLen = data.length; i < iLen; i++) {
-                temp = data[i];
-                for (var j = 0, jLen = temp.length; j < jLen; j++) {
-
-                    quotes = ['"'+temp[j]+'"'];
-                    if (!orderedData[j]) {
-                        orderedData.push([quotes]);
-                    } else {
-                        orderedData[j].push(quotes);
-                    }
-                }
-            }
-            return keys.join(',') + '\r\n' + orderedData.join('\r\n');
-        }
-
-
-        var str = convertToCSV(data, keys);
-
-        var blob = new Blob([str], {type: "text/plain;charset=utf-8"});
-        saveAs(blob, [participantNum+'.csv']);
+  var convertToCSV = function(data, keys) {
+    var orderedData = [];
+    for (var i = 0; i < data.length; i++) {
+      var temp = data[i];
+      for (var j = 0; j < temp.length; j++) {
+        var quotes = ['"'+temp[j]+'"'];
+        orderedData[j] ? orderedData[j].push(quotes) : orderedData.push([quotes]);
+      }
     }
+    return keys.join(',') + '\r\n' + orderedData.join('\r\n');
+  }
+
+  var str = convertToCSV(data, keys);
+
+  var blob = new Blob([str], {type: "text/plain;charset=utf-8"});
+  saveAs(blob, [participantNum+'.csv']);
+}
 
 function minutesAndSeconds(time) {
   var min = 0;
@@ -162,17 +145,10 @@ function minutesAndSeconds(time) {
   return min + "m" + s + "s"
 }
 
-function timeTaken(arr) {
-  var total = arr.reduce(function(a,b){
-    return a + b;
-  });
-  return "Total: " + minutesAndSeconds(total);
-}
-
 $("#cover-btn").on("click", function(){
   $("#cover-btn").toggleClass("hide");
   $("#wait-btn").toggleClass("hide");
-  setTimeout(start, 5000);
+  setTimeout(start, 4000);
 });
 
 $("#form-cover-btn").on("click",function(){
@@ -192,8 +168,7 @@ $("#export").on("click", function(){
     }
   }
   participantNum = "B" + (Math.floor(Math.random()*90000) + 10000);
-  thinkTime.push(timeTaken(thinkTime));
-  unsortedRecord.push("Total time: " + minutesAndSeconds(totalTime));
+  unsortedRecord.push("Total thinking time: " + minutesAndSeconds(totalTime));
   participantInfo.push(participantNum);
   exportFile();
   $("#export").toggleClass("hide");
