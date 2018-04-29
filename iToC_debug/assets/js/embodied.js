@@ -1,5 +1,4 @@
-var thinkTime = [],
-    unsortedAnswer = [],      unsortedRecord = [],
+var unsortedAnswer = [],      unsortedRecord = [],
     answer = [],              interval,
     totalSecs,            data,
     participantInfo = [],     participantNum,
@@ -11,12 +10,18 @@ var thinkTime = [],
     correctAnswer = ["4E", "7B", "7H", "Q", "R", "W"],
     gong = new Audio("../assets/gong.mp3");
 
-function timer(secs) {
-  totalSecs = secs;
-  interval = setInterval(function() {
-     totalSecs ++
-  }, 1000);
-}
+  function restartTimer(secs, func) {
+    var reset = secs;
+    remainingSecs = secs;
+    interval = setInterval(function() {
+       secs--
+       remainingSecs--
+       if (secs == 0) {
+          func();
+          secs = reset;
+       }
+    }, 1000);
+  }
 
 function start() {
   counter ++;
@@ -27,22 +32,32 @@ function start() {
   $("#partInfo").addClass("hide");
   answer = [];
   unsortedAnswer = [];
-  timer(0);
+  restartTimer(30, resetBoard);
+}
+
+function resetBoard() {
+  gong.play();
+  clearInterval(interval);
+  setTimeout(restart, 4000);
+}
+
+function restart() {
+  totalTime += 34;
+  restartTimer(30, resetBoard);
 }
 
 function ready() {
   gong.play();
   $("#formCover").toggleClass("partCover hide");
-  $("#puzzleCover").toggleClass("partCover");
   clearInterval(interval);
-  totalTime += totalSecs;
+  var remainder = (30 - remainingSecs);
+  totalTime += remainder;
 }
 
 function submit() {
   gong.play();
   $("#cover").toggleClass("hide");
   $("#puzzle").toggleClass("hide");
-  $("#puzzleCover").toggleClass("partCover");
   clearInterval(interval);
   for(var i = 0; i < letters.length; i++){
     unsortedAnswer.push(" " + letters[i].value.toUpperCase() + " to " + rows[i].value.toUpperCase() + columns[i].value.toUpperCase())
@@ -66,8 +81,8 @@ function submit() {
 }
 
 function exportFile() {
-  var data = [unsortedRecord, thinkTime, participantInfo];
-  var keys = ['"Answers submitted"','"Thinking Time (seconds)"', '"Participant Info"'];
+  var data = [unsortedRecord, participantInfo];
+  var keys = ['"Answers submitted"', '"Participant Info"'];
 
   var convertToCSV = function(data, keys) {
     var orderedData = [];
@@ -101,7 +116,7 @@ function minutesAndSeconds(time) {
 $("#cover-btn").on("click", function(){
   $("#cover-btn").toggleClass("hide");
   $("#wait-btn").toggleClass("hide");
-  setTimeout(start, 5000);
+  setTimeout(start, 4000);
 });
 
 $("#form-cover-btn").on("click",function(){

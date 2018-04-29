@@ -29,13 +29,12 @@ function restartTimer(secs, func) {
   var reset = secs;
   remainingSecs = secs;
   interval = setInterval(function() {
-     secs--
-     remainingSecs--
-     console.log(secs)
-     if (secs == 0) {
+    secs--
+    remainingSecs--
+    if (secs == 0) {
         func();
         secs = reset;
-     }
+    }
   }, 1000);
 }
 
@@ -72,7 +71,6 @@ function restart() {
 function ready() {
   gong.play();
   $("#formCover").toggleClass("partCover hide");
-  $("#timerTwoDisplay").toggleClass("hide");
   $("#puzzleCover").toggleClass("partCover");
   $(".token").css("z-index","50");
   clearInterval(interval);
@@ -90,7 +88,6 @@ function submit() {
   $("#puzzle").toggleClass("hide");
   $("#puzzleCover").toggleClass("partCover");
   clearInterval(interval);
-  $("#cd2 span").text("45");
   for(var i = 0; i < letters.length; i++){
     unsortedAnswer.push(" " + letters[i].value.toUpperCase() + " to " + rows[i].value.toUpperCase() + columns[i].value.toUpperCase())
     answer.push(letters[i].value.toUpperCase(), rows[i].value + columns[i].value.toUpperCase());
