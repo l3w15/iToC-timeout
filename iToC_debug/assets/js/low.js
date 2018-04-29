@@ -1,5 +1,4 @@
-var thinkTime = [],
-    unsortedAnswer = [],      unsortedRecord = [],
+var unsortedAnswer = [],      unsortedRecord = [],
     answer = [],              interval,
     totalSecs,            data,
     participantInfo = [],     participantNum,
@@ -66,7 +65,7 @@ function submit() {
 }
 
 function exportFile() {
-  var data = [unsortedRecord, thinkTime, participantInfo];
+  var data = [unsortedRecord, participantInfo];
   var keys = ['"Answers submitted"','"Thinking Time (seconds)"', '"Participant Info"'];
 
   var convertToCSV = function(data, keys) {
@@ -101,7 +100,7 @@ function minutesAndSeconds(time) {
 $("#cover-btn").on("click", function(){
   $("#cover-btn").toggleClass("hide");
   $("#wait-btn").toggleClass("hide");
-  setTimeout(start, 5000);
+  setTimeout(start, 4000);
 });
 
 $("#form-cover-btn").on("click",function(){
