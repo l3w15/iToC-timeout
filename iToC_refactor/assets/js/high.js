@@ -28,9 +28,22 @@ $( ".col-sm-1" ).droppable({
 function restartTimer(secs, func) {
   var reset = secs;
   remainingSecs = secs;
+  var upcount = 0;
   interval = setInterval(function() {
     secs--
     remainingSecs--
+    upcount ++
+    if (totalTime + upcount >= 600) {
+     clearInterval(interval);
+     totalTime += upcount;
+     console.log(totalTime);
+     gong.play();
+     $("#cover").toggleClass("hide");
+     $("#puzzle").toggleClass("hide");
+     $("#formCover").toggleClass("partCover hide");
+     $("#cover2").toggleClass("hide");
+     $("#finish").html("END OF SESSION");
+    }
     if (secs == 0) {
         func();
         secs = reset;
