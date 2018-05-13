@@ -13,7 +13,18 @@ var unsortedAnswer = [],      unsortedRecord = [],
 function timer(secs) {
   totalSecs = secs;
   interval = setInterval(function() {
-     totalSecs ++
+    totalSecs ++
+    if (totalTime + totalSecs >= 600) {
+      totalTime += totalSecs;
+      clearInterval(interval);
+      gong.play();
+      console.log(totalTime);
+      $("#cover").toggleClass("hide");
+      $("#puzzle").toggleClass("hide");
+      $("#formCover").toggleClass("partCover hide");
+      $("#cover2").toggleClass("hide");
+      $("#finish").html("END OF SESSION");
+    }
   }, 1000);
 }
 
@@ -66,7 +77,7 @@ function submit() {
 
 function exportFile() {
   var data = [unsortedRecord, participantInfo];
-  var keys = ['"Answers submitted"','"Thinking Time (seconds)"', '"Participant Info"'];
+  var keys = ['"Answers submitted"', '"Participant Info"'];
 
   var convertToCSV = function(data, keys) {
     var orderedData = [];
